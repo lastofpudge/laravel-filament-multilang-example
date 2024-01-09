@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PostResource\Pages;
-use App\Models\Post;
+use App\Filament\Resources\CategoryResource\Pages;
+use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
@@ -11,11 +11,11 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class PostResource extends Resource
+class CategoryResource extends Resource
 {
     use Translatable;
 
-    protected static ?string $model = Post::class;
+    protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,19 +23,15 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')->label(__('Title'))->required(),
-                Forms\Components\RichEditor::make('content')->label(__('Content'))->required(),
-                Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'name')
-                    ->required(),
-            ])->columns(1);
+                Forms\Components\TextInput::make('name')->label(__('Name'))->required(),
+            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('name'),
             ])
             ->filters([
                 //
@@ -59,9 +55,9 @@ class PostResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
+            'index' => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategory::route('/create'),
+            'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }
 

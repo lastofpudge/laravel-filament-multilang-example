@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
-class Post extends Model
+class Category extends Model
 {
     use HasTranslations;
     use HasFactory;
@@ -18,13 +18,10 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
-        'content',
-        'published_at',
-        'category_id',
+        'name',
     ];
 
-    public array $translatable = ['title', 'content'];
+    public array $translatable = ['name'];
 
     /**
      * The attributes that should be cast to native types.
@@ -33,16 +30,11 @@ class Post extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'title' => 'array',
-        'content' => 'array',
-        'published_at' => 'timestamp',
-        'category_id' => 'integer',
+        'name' => 'array',
     ];
 
-//    public array $translatable = ['title', 'content'];
-
-    public function category(): BelongsTo
+    public function posts(): HasMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Post::class);
     }
 }

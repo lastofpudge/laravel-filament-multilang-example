@@ -1,0 +1,12 @@
+models:
+  Post:
+    title: json
+    content: json
+    published_at: nullable timestamp
+    relationships:
+      belongsTo: Category
+
+  Category:
+    name: json
+    relationships:
+      hasMany: Post

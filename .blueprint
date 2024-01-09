@@ -1,0 +1,8 @@
+created:
+    - database/migrations/2024_01_08_230535_create_posts_table.php
+    - database/migrations/2024_01_08_230536_create_categories_table.php
+    - app/Models/Post.php
+    - app/Models/Category.php
+models:
+    Post: { title: json, content: json, published_at: 'nullable timestamp', relationships: { belongsTo: Category } }
+    Category: { name: json, relationships: { hasMany: Post } }
