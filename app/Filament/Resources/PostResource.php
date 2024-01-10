@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
+use App\Models\Category;
 use App\Models\Post;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -27,6 +28,7 @@ class PostResource extends Resource
                 Forms\Components\RichEditor::make('content')->label(__('Content'))->required(),
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')
+                    ->getOptionLabelFromRecordUsing(fn(Category $record) => "$record->name")
                     ->required(),
             ])->columns(1);
     }
