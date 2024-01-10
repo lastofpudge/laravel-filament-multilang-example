@@ -24,16 +24,17 @@
     </div>
 
     <div class="px-6 py-6">
-        @if($posts)
-            <ul class="list-disc pl-5">
-                @foreach($posts as $post)
-                    <li class="mb-2">
-                        <h2 class="text-lg font-semibold">{{ $post->title }}</h2>
-                        <div lass="text-md">{!! $post->content !!}</div>
-                    </li>
-                @endforeach
-            </ul>
-        @endif
+        <ul class="list-disc pl-5">
+            @forelse ($posts as $post)
+                <li class="mb-2">
+                    <h2 class="text-lg font-semibold"><small>name: </small><br>{{ $post->title }}</h2>
+                    <div lass="text-md"><small>content: </small><br>{!! $post->content !!}</div>
+                    <div class="text-sm"><small>category: </small><br>{{ $post->category->name }}</div>
+                </li>
+            @empty
+                <p>No posts</p>
+            @endforelse
+        </ul>
     </div>
 </div>
 </body>
