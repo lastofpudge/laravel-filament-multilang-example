@@ -8,7 +8,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with('category')->get();
 
         return view('posts.index', ['posts' => $posts]);
     }
