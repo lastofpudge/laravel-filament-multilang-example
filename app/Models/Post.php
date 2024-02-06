@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Translatable\HasTranslations;
@@ -10,7 +9,6 @@ use Spatie\Translatable\HasTranslations;
 class Post extends Model
 {
     use HasTranslations;
-    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -38,8 +36,6 @@ class Post extends Model
         'published_at' => 'timestamp',
         'category_id' => 'integer',
     ];
-
-//    public array $translatable = ['title', 'content'];
 
     public function category(): BelongsTo
     {

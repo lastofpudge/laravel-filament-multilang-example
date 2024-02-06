@@ -28,7 +28,7 @@ class PostResource extends Resource
                 Forms\Components\RichEditor::make('content')->label(__('Content'))->required(),
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')
-                    ->getOptionLabelFromRecordUsing(fn(Category $record) => "$record->name")
+                    ->getOptionLabelFromRecordUsing(fn (Category $record) => "$record->name")
                     ->required(),
             ])->columns(1);
     }
@@ -66,5 +66,4 @@ class PostResource extends Resource
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
-
 }
