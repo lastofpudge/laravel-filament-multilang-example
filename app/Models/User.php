@@ -16,6 +16,7 @@ class User extends Authenticatable implements FilamentUser
 
     /**
      * The attributes that are mass assignable.
+     *
      * @var array<int, string>
      */
     protected $fillable = [
@@ -26,6 +27,7 @@ class User extends Authenticatable implements FilamentUser
 
     /**
      * The attributes that should be hidden for serialization.
+     *
      * @var array<int, string>
      */
     protected $hidden = [
@@ -35,13 +37,14 @@ class User extends Authenticatable implements FilamentUser
 
     /**
      * The attributes that should be cast.
+     *
      * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    
+
     public function canAccessPanel(Panel $panel): bool
     {
         return str_ends_with($this->email, '@admin.com');

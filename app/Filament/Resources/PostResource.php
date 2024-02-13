@@ -3,8 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
+use App\Filament\Resources\PostResource\RelationManagers\TagsRelationManager;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
@@ -30,6 +32,10 @@ class PostResource extends Resource
                     ->relationship('category', 'name')
                     ->getOptionLabelFromRecordUsing(fn (Category $record) => "$record->name")
                     ->required(),
+                Forms\Components\Select::make('tags')
+                    ->relationship('tags', 'name')
+                    ->getOptionLabelFromRecordUsing(fn (Tag $record) => "$record->name")
+                    ->multiple(),
             ])->columns(1);
     }
 
@@ -55,6 +61,7 @@ class PostResource extends Resource
     public static function getRelations(): array
     {
         return [
+            TagsRelationManager::class,
         ];
     }
 
